@@ -83,3 +83,26 @@ console.log(names);
 
 console.log("\n\n");
 console.log(clients.filter(client => client.age>20 && client.age<30));
+
+
+
+/*
+let products = [
+    {name: "Phone", price:800, inStock: true, brand: "Apple", rating: 4.5},
+    {name : "Laptor",price:1200,inStock:true,brand:"ASUS",rating:4.4},
+    {name : "Tablet", price: 600, inStock: false, brand: "Samsung", rating: 4.2},
+    {name : "Smart Watch", price: 200, inStock: true, brand: "Apple", rating: 4.8},
+]
+
+products.forEach(product => {
+    console.log(`${product.name}: ${product.price} USD\nBrand: ${product.brand}, ${product.rating} stars\n`);
+});
+
+let names = products.map(product => product.name);
+console.log("Product names: " + names.join(", "));
+console.log("\n");
+console.log("Products with rating >= 4.5: ",products.filter(product => product.rating >=4.5));
+console.log("\n");
+console.log("Total price of all the products is: ", products.reduce((acc,cur) => acc+cur.price,0));
+
+*/
