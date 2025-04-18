@@ -52,3 +52,6 @@ console.log(height)// undefined
 height = 182;
 console.log(height) //182
 console.log(object_1.height) //183
+for(let key in object_1) {
+    console.log(key + ": " + object_1[key] +" "+ typeof(object_1[key])); //object_1[key] + " " + typeof object_1[key]);
+}
