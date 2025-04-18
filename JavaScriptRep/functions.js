@@ -29,6 +29,24 @@ const calAge = (birthyear,getMonth,getDay) => {
     let currentDay = 30 - getDay + new Date().getDate();
     return `Years: ${MyYear}, Month: ${currentMonth}, Days: ${currentDay}`;
 }
+/*
+const calAge = (year, month, day) => {
+  const birthDate = new Date(year, month - 1, day);
+  const now = new Date();
+
+  const diff = now - birthDate;
+  const ageDate = new Date(diff);
+
+  const years = ageDate.getUTCFullYear() - 1970;
+  const months = ageDate.getUTCMonth();
+  const days = ageDate.getUTCDate() - 1;
+
+  return `Years: ${years}, Months: ${months}, Days: ${days}`;
+};
+
+console.log(calAge(2005, 7, 24));
+
+*/
 console.log(calAge(2005,7,24));
 
 console.log("\n\n");
