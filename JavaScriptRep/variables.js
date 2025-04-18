@@ -55,3 +55,45 @@ console.log(object_1.height) //183
 for(let key in object_1) {
     console.log(key + ": " + object_1[key] +" "+ typeof(object_1[key])); //object_1[key] + " " + typeof object_1[key]);
 }
+console.log(object_1["isSmoker"]=true); //false
+console.log(object_1.age);
+if(object_1.isSmoker == true && object_1["age"]>=18  ) {
+    console.log("Allowed to buy cigarettes amd smokes!");
+}else if(object_1.age >=18 && object_1.isSmoker == false) {
+    console.log("Allowed to buy cigarettes but don't smoke!");
+
+}else{
+    console.log("Not allowed to buy cigarettes!");
+}
+
+//let check = object_1.country == "Poland" && object_1.isSmoker ? "Eligible" : "Not eligible";
+
+let check =
+  object_1.country == "Poland" && object_1.isSmoker
+    ? "Eligible"
+    : "Not eligible";
+console.log(check);
+
+let a = 5;
+let b = "5";
+
+console.log(a==b); // equality ?
+console.log(a===b); // equality and type ?
+console.log(a!=b); // inequality ?
+console.log(a!==b); // inequality amd type ?
+
+
+let role = "use"
+
+
+switch (role){
+    case "admin":
+        console.log("You are admin!");
+        break;
+    case "user":
+        console.log("You are user!");
+        break;
+    default:
+        console.log("Who are you at all ?!");
+        //break; 
+}
