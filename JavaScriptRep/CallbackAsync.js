@@ -7,7 +7,7 @@ function afterWork() {
   console.log("Done!");
 }
 
-doSomething(afterWork); // Передаємо функцію як аргумент
+doSomething(afterWork);
 
 setTimeout(() => {
   console.log("Step 1");
