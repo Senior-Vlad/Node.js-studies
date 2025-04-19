@@ -21,7 +21,7 @@ let order = {
       productName: "Headphones",
       productPrice: 199.99,
       productQuantity: 2,
-    },
+    }
   }
 };
 
@@ -51,3 +51,12 @@ console.log(InActiveUsers); // filter inactive users
 
 const SortedUsers = [...updateUser].sort((a,b) => a.name.localeCompare(b.name)); // sort users by name
 console.log(SortedUsers);
+
+console.log("\n\n\n\n\n\n\n\n\n\n\n\n");
+
+
+/*
+let object  = { object_nested1: {...}, object_nested_2:{...}}; 
+То тоді, якщо б я хотів отримати масив значень з якогось вкладеного об'єкта, притому, посортованого - 
+let array1 = [ [...object.object_nested1].sort((a,b) => a.поле - b.поле), [...object.object_nested2].sort((a,b) => a.поле.localeCompare(b.поле)]); 
+*/ 
