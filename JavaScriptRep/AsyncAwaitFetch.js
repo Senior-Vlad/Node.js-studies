@@ -55,23 +55,22 @@ async function runDelays() {
   }
 }
 //runDelays();
-
-
+const timeoutPromise = new Promise((_, reject) => {
+  setTimeout(() => reject("Timeout"), 5000);
+});
 function ageChecker(age) {
   return new Promise((resolve, reject) => {
-    /*
-    if(age>=18){
-            resolve("Access granted!");
-        }else{
-            reject("Too young!");
-        }
-    */
     try {
       if (age >= 18) {
         console.log("Access granted!");
+        resolve("Checked");
+      } else {
+        
+        reject("Checked.\nToo young!"),
+        timeoutPromise;// an error for the info
       }
     } catch (error) {
-      reject("Too young!");
+      console.log("An error occured:",error);
     }
   });
 }
@@ -88,9 +87,51 @@ async function ageVerification(age) {
   }
 }
 
-console.log(ageChecker(16), "\n\n", ageVerification(16)); //** */
+console.log(ageChecker(19), "\n\n", ageVerification(16)); //** */
 //ageVerification(16);
 // Promise {''} = Object of Promise, that is already finished.
 // Promise { <pending> } = Object of Promise, that is still pending
 // Promise { <fulfilled> } = Object of Promise, that is already resolved
 // Promise { <rejected> } = Object of Promise, that is already rejected
+
+
+/*
+const timeoutPromise = new Promise((_, reject) => {
+  setTimeout(() => reject("Timeout"), 5000);
+});
+
+Promise.race([
+  fetch("https://api.example.com/users"),
+  timeoutPromise
+])
+.then(res => res.json())
+.catch(err => console.error("Error or timeout:", err));
+Promise.race - competition between API-request and timer. If API wouldn't manage to satisfy the expected result - we will get "Timeout"
+
+More examples:
+1
+async function getUser(id) {
+  const res = await fetch(`/api/user/${id}`);
+  const data = await res.json();
+
+  if (!data) throw new Error("User not found!");
+  if (data.age < 18) throw new Error("Too young!");
+
+  return data;
+}
+
+2
+console.log("Loading...");
+
+getUser(5)
+  .then(data => {
+    console.log("User:", data);
+  })
+  .catch(err => {
+    console.error("Something went wrong:", err.message);
+  })
+  .finally(() => {
+    console.log("Finished");
+  });
+
+*/
