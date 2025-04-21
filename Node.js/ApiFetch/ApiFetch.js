@@ -1,26 +1,3 @@
-// fetch("https://jsonplaceholder.typicode.com/posts")
-//   .then((response) => response.json()) // transform into JS obj
-//   .then((data) => console.log(data))
-//   .catch((error) => console.log(error));
-
-//const { create } = require("domain");
-
-// fetch("https://jsonplaceholder.typicode.com/posts")
-//   .then((response) => response.json()) // transform into JS obj
-//   .then((data) => {
-//     data.forEach((element) => {
-//       console.log("Posts", element.body, "\n");
-//       // console.log("Titles", element.id);
-//     });
-//     return data;
-//   })
-//   .then((data) =>
-//     data.forEach((element) => {
-//       console.log("Title: ", element.title);
-//     })
-//   )
-//   .catch((error) => console.log(error));
-
 async function getData() {
   //GET
   try {
@@ -42,7 +19,6 @@ async function getData() {
     console.log(error);
   }
 }
-//getData();
 
 async function createPost() {
   //POST
@@ -67,6 +43,7 @@ async function createPost() {
 }
 
 async function createSomePost(title_f, body_f, userId_f) {
+  //POST
   try {
     if (
       typeof title_f != "string" ||
@@ -170,4 +147,19 @@ async function deletePost(postId) {
 // patchPost(12);
 // console.log("12321321321");
 // getData();
-deletePost(555);
+//deletePost(555);
+
+import { randomBytes } from "crypto";
+//const { randomBytes } = require("crypto");
+function generateRandomText() {
+  const length = Math.floor(Math.random() * (20 - 8 + 1)) + 8; // Random length between 8 and 20
+  return randomBytes(length).toString("hex").slice(0, length); // Convert to hex and slice to desired length
+}
+
+for (let i = 1; i < 100; i++) {
+  await createSomePost(
+    generateRandomText(),
+    generateRandomText(),
+    Math.floor(Math.random() * 100)
+  );
+}
