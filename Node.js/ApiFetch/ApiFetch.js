@@ -3,7 +3,7 @@
 //   .then((data) => console.log(data))
 //   .catch((error) => console.log(error));
 
-const { create } = require("domain");
+//const { create } = require("domain");
 
 // fetch("https://jsonplaceholder.typicode.com/posts")
 //   .then((response) => response.json()) // transform into JS obj
@@ -33,7 +33,9 @@ async function getData() {
         "\nTitle: ",
         element.title,
         "\nBody: ",
-        element.body
+        element.body,
+        "\nUserId: ",
+        element.userId
       );
     });
   } catch (error) {
@@ -59,6 +61,41 @@ async function createPost() {
     });
     const data = await response.json();
     console.log("Created Post:", data);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+async function createSomePost(title_f, body_f, userId_f) {
+  try {
+    if (
+      typeof title_f != "string" ||
+      typeof body_f != "string" ||
+      typeof userId_f != "number"
+    ) {
+      throw new Error("Entered invalid data. Please, correct and try again! ");
+    } else {
+      const getResponse = await fetch(`http://localhost:3000/posts`);
+      const posts = await getResponse.json();
+
+      const maxId = posts.length > 0 ? Math.max(...posts.map((p) => p.id)) : 0;
+      const newId = maxId + 1;
+
+      const response = await fetch(`http://localhost:3000/posts`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          id: newId,
+          title: title_f,
+          body: body_f,
+          userId: userId_f,
+        }),
+      });
+      //const data = await response.json();
+      //console.log(data);
+    }
   } catch (error) {
     console.log(error);
   }
@@ -127,9 +164,10 @@ async function deletePost(postId) {
   }
 }
 
-createPost();
-updatePost(1);
-deletePost(2);
-patchPost(12);
-console.log("12321321321");
-getData();
+// createPost();
+// updatePost(1);
+// deletePost(2);
+// patchPost(12);
+// console.log("12321321321");
+// getData();
+deletePost(555);

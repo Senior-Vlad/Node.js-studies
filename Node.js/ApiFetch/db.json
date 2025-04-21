@@ -1,6 +1,10 @@
 {
   "posts": [
-    { "id": 1, "title": "Hello", "body": "World" }
+    {
+      "id": 555,
+      "title": "My new Post",
+      "body": "Some kind of body of the post",
+      "userId": 15
+    }
   ]
 }
-
