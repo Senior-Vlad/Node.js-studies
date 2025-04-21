@@ -34,7 +34,7 @@ function checkAccess_a(userId) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
-        const user = users.find((user) => user.id === userId); // Find user by id
+        const user = users.find((user) => user.id === userId);//
         if (!user) {
           reject(`Failure, user: id=${userId} does not exist!`);
           return;
@@ -155,6 +155,21 @@ console.log(
 checkAccess(11);
 /*
 (async () => {
-    await checkAccess(11); // Logs the result after 2 seconds
+    await checkAccess(11); //IIFE (Immediately Invoked Function Expression) LOGS
 })();
 */
+console.log("List of ids and names");
+users.forEach((user) => {
+  console.log(user.id, user.name);
+});
+
+let usersUpdated = users.map((user) => {
+    return user.name ==="Vlad" ? {...user, name: "Vladyslav", subscriptionType:"MEGA"}:user 
+});
+
+console.log(usersUpdated);
+
+let [id,name,age,subscriptionType,isLoggedIn] = users;
+let usersString = JSON.stringify(users);
+let usersObjAgain = JSON.parse(usersString);
+console.log(usersString,"\n\n\n\n\n",usersObjAgain);
