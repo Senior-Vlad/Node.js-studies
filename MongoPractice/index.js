@@ -280,7 +280,6 @@ async function findAllUsersByAge(age_f, age_t) {
       .find({ age: { $gte: age_f, $lte: age_t } })
       .toArray();
     //.find ({$or: [{age: {$lte:age_f}},{age:{$gte:age_t}}]})
-    //
     if (result.length > 0) {
       console.log("Finded users are: ", result);
     } else {
@@ -341,7 +340,7 @@ async function findAllUsersBut(age_f, name_f) {
   }
 }
 
-//await createUser("Maksym", 16, "emailKid@example.com");
+//await createUser("Vladyslav", 19, "vladyslav@example.com");
 
 await readUsers();
 
@@ -373,4 +372,15 @@ $type | type verification
 $or | at least 1 request fulfills (||)
 $and &&
 $not !=
+
+Оператор | Для чого використовується? | Приклад
+$match | Фільтрує документи (аналог find) | { $match: { age: { $gte: 18 } } }
+$group | Групує документи та дозволяє робити агрегації (підрахунок, сума, середнє тощо) | { $group: { _id: "$age", total: { $sum: 1 } } }
+$sort | Сортування результатів | { $sort: { age: -1 } }
+$project | Вивід лише вибраних полів або створення нових | { $project: { name: 1, email: 1 } }
+$limit | Обмежує кількість результатів | { $limit: 5 }
+$skip | Пропускає N документів | { $skip: 10 }
+$unwind | Розпаковує масиви в документи | { $unwind: "$tags" }
+$lookup | Робить join між колекціями (аналог JOIN в SQL) | { $lookup: { from: "orders", localField: "userId", foreignField: "user_id", as: "userOrders" } }
+$addFields | Додає нові поля на основі обчислень або логіки | { $addFields: { isAdult: { $gte: ["$age", 18] } } }
 */
