@@ -4,7 +4,7 @@ const orderService = require("../services/orderService.js");
 
 exports.getAllOrders = async (req, res, next) => {
   try {
-    const users = await orderService.findAllUsers();
+    const users = await orderService.getAllOrders();
     res.json(users);
   } catch (error) {
     next(error);
