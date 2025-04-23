@@ -1,28 +1,38 @@
-import express from "express";
+//Entry point of the app
 
-const app = express(); // webserver
-const PORT = 3005; //setting a port (or from .env)
-app.get("/", (req, res) => {
-  // if HTTP GET-request on / comes to the server, give back the answer (res.send)
-  // req - from user, res - from server
-  res.send("Server works perfectly !");
+const express = require("express");
+const { connectDB } = require("./config/database");
+const userRoutes = require("./routes/userRoutes.js");
+const orderRoutes = require("./routes/orderRoutes.js");
+
+require("dotenv").config();
+
+const app = express();
+
+const PORT = process.env.PORT;
+
+app.use(express.json()); //!
+
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.path}`);
+  next();
 });
 
-app.listen(PORT, () => {
-  // when the server is ready to deploy - we get that msg in console
-  console.log(`Server started on http://localhost:${PORT}`);
+app.use("/users", userRoutes);
+app.use("/orders", orderRoutes);
+
+app.use((err, req, res, next) => {
+  console.error("Error", err);
+  res.status(500).json({ error: err.message || "Internal Server Error" });
 });
 
-app.use(express.json()); // *** middleware - w8 json in body request and automatically unpack it. (unparse)
-
-app.post("/orders", (req, res) => {
-  // when someone makes POST on ./orders, function executes
-  const { good, price, amount } = req.body; // *** has it's value because of app.use
-  console.log("Order received:", { good, price, amount });
-
-  res.status(201).json({
-    //Created code
-    message: "Order accepted",
-    order: { good, price, amount },
+connectDB()
+  .then(() => {
+    app.listen(PORT, () => {
+      console.log("Server is running !");
+    });
+  })
+  .catch((error) => {
+    console.error("Connection Failed", error);
+    process.exit(1);
   });
-});
